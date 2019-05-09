@@ -3,13 +3,11 @@ package com.example.hirecar.controller;
 import com.example.hirecar.bean.User;
 import com.example.hirecar.param.LoginParam;
 
+import com.example.hirecar.param.RegisterParam;
 import com.example.hirecar.service.UserService;
 import com.example.hirecar.util.Response;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/user")
@@ -29,5 +27,16 @@ public class UserController {
         }
     }
 
+    @RequestMapping(value = "/register",method = RequestMethod.POST)
+    public  Response register(RegisterParam registerParam) {
+        int row = userService.register(registerParam);
+        if(row == -1) {
+            return new Response(400,"账号已存在");
+        } else if(row == 1) {
+            return new Response(200,"注册成功");
+        } else {
+            return new Response(500,"注册失败");
+        }
+    }
 
 }

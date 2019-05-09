@@ -9,4 +9,18 @@
 		AND
 		password=#{password}
 	</select>
+    <select id="selectAccount" resultType="com.example.hirecar.bean.User">
+		SELECT account
+		FROM user
+		WHERE
+		account=#{account}
+	</select>
+    <insert id="addUser" useGeneratedKeys="true" keyProperty="userId" keyColumn="user_id" parameterType="com.example.hirecar.bean.User">
+		INSERT INTO
+		user(account,password,
+		avatar_path,name)
+		VALUES
+		(#{account},#{password},
+		#{avatarPath},#{name})
+	</insert>
 </mapper>
