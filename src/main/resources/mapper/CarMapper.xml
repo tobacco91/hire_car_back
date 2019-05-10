@@ -9,4 +9,37 @@
 		ORDER BY brows_times DESC
 		LIMIT #{count}
 	</select>
+    <insert id="addCar" useGeneratedKeys="true" keyProperty="carId" keyColumn="car_id" parameterType="com.example.hirecar.param.AddCarParam">
+		INSERT INTO
+		car
+		(title,description,
+		image_path,address,phone,price)
+		VALUES
+		(#{title},#{description},
+		#{imagePath},#{address},#{phone},#{price})
+	</insert>
+    <update id="updateCarBuyStatus">
+        UPDATE car
+        SET buy_status = 1
+        WHERE car_id =#{carId}
+    </update>
+	<select id="getCar" resultType="com.example.hirecar.bean.Car">
+		SELECT *
+		FROM car
+		WHERE
+		car_id=#{carId}
+	</select>
+	<select id="selectTitle" resultType="com.example.hirecar.bean.Car">
+		SELECT *
+		FROM car
+		WHERE
+		title
+		LIKE
+		#{title}
+	</select>
+	<update id="addBrowsTimes">
+        UPDATE car
+        SET brows_times=(brows_times+1)
+        WHERE car_id =#{carId}
+    </update>
 </mapper>

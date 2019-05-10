@@ -1,5 +1,7 @@
 package com.example.hirecar.controller;
 
+
+import com.example.hirecar.bean.Release;
 import com.example.hirecar.bean.User;
 import com.example.hirecar.param.LoginParam;
 
@@ -8,6 +10,9 @@ import com.example.hirecar.service.UserService;
 import com.example.hirecar.util.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
@@ -38,5 +43,14 @@ public class UserController {
             return new Response(500,"注册失败");
         }
     }
+
+    @GetMapping("/typeList")
+    public Response<List> typeList(@RequestBody Map<String,Object> params) {
+       List list = userService.typeList(params.get("type").toString(),Integer.parseInt(params.get("userId").toString()));
+        System.out.println(list);
+        return new Response(list);
+
+    }
+
 
 }

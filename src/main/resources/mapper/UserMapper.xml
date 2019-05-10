@@ -10,7 +10,7 @@
 		password=#{password}
 	</select>
     <select id="selectAccount" resultType="com.example.hirecar.bean.User">
-		SELECT account
+		SELECT *
 		FROM user
 		WHERE
 		account=#{account}

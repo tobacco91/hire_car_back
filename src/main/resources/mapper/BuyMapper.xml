@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.hirecar.mapper.BuyMapper">
+    <insert id="addBuy" parameterType="com.example.hirecar.bean.Buy"  useGeneratedKeys="true" keyProperty="buyId" keyColumn="buy_id">
+		INSERT INTO
+		buy
+		(car_id,user_id)
+		VALUES
+		(#{carId},#{userId})
+	</insert>
+	<select id="getList" resultType="com.example.hirecar.bean.Buy">
+        SELECT
+        buy.car_id,buy.user_id,car.title,car.car_id,car.image_path
+        FROM
+        buy,car
+        WHERE
+        buy.car_id = car.car_id
+        AND
+        buy.user_id = #{userId}
+    </select>
+</mapper>
