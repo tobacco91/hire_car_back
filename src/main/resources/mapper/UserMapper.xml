@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.hirecar.mapper.UserMapper">
     <select id="getByAccountPasswd" resultType="com.example.hirecar.bean.User">
-		SELECT account,password
+		SELECT *
 		FROM user
 		WHERE
 		account=#{account}
