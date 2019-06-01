@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
     private ReleaseMapper releaseMapper;
 
     @Override
-    public UserCachePDO sureLogin(LoginParam loginParam) {
+    public User sureLogin(LoginParam loginParam) {
         User user = userMapper.getByAccountPasswd(loginParam);
         if(user == null) {
             return null;
@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService {
             userCachePDO.setUserId(user.getUserId());
             userCachePDO.setToken(UUID.randomUUID().toString().replace("-", ""));
             this.addCatche(userCachePDO);
-            return userCachePDO;
+            return user;
         }
     }
 
@@ -84,11 +84,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List typeList(String type, Integer userId) {
+    public List typeList(String type, int userId) {
         switch (type) {
             case "release":
                 List<Release> list = releaseMapper.getList(userId);
-                System.out.println(list);
+
                 return list;
             case "buy":
                 List<Buy> buyList = buyMapper.getList(userId);

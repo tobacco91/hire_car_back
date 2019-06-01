@@ -10,8 +10,8 @@ import com.example.hirecar.param.RegisterParam;
 import java.util.List;
 
 public interface UserService {
-    UserCachePDO sureLogin(LoginParam loginParam);
+    User sureLogin(LoginParam loginParam);
     int register(RegisterParam registerParam);
     UserCachePDO addCatche(UserCachePDO userCachePDO);
-    List typeList(String type, Integer userId);
+    List typeList(String type, int userId);
 }

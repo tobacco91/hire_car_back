@@ -1,5 +1,6 @@
 package com.example.hirecar.service.impl;
 
+import com.example.hirecar.PDO.CarPDO;
 import com.example.hirecar.bean.Buy;
 import com.example.hirecar.bean.Car;
 
@@ -11,6 +12,8 @@ import com.example.hirecar.mapper.CollectMapper;
 import com.example.hirecar.mapper.ReleaseMapper;
 import com.example.hirecar.param.AddCarParam;
 import com.example.hirecar.service.CarService;
+import com.example.hirecar.util.Encryption;
+import com.example.hirecar.util.FatherTochild;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -63,23 +66,47 @@ public class CarServiceImpl implements CarService {
 
     @Override
     public boolean hireCar(Buy buy) {
-        carMapper.updateCarBuyStatus(buy.getCarId());
-        int row = buyMapper.addBuy(buy);
-        System.out.println(row);
-        return true;
+        Buy res = buyMapper.selectBuy(buy);
+        if(res == null) {
+            carMapper.updateCarBuyStatus(buy.getCarId());
+            buyMapper.addBuy(buy);
+            return true;
+        } else {
+            return false;
+        }
+
     }
 
     @Override
     public boolean collectCar(Collect collect) {
-        collectMapper.addCollect(collect);
-        return true;
+        Collect res = collectMapper.selectCollect(collect);
+        if(res == null) {
+            collectMapper.addCollect(collect);
+            return true;
+        } else {
+            return false;
+        }
+
+
+
     }
 
     @Override
-    public Car getCar(int carId) {
+    public CarPDO getCar(int carId) {
         Car car = carMapper.getCar(carId);
+        CarPDO carPDO = new CarPDO();
+        try {
+            FatherTochild.fatherToChild(car,carPDO);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        String price = car.getPrice()+ "";
+        Encryption encryption = new Encryption(price.getBytes());
+        carPDO.setCode(encryption.getCrc());
+        carPDO.setStringPrice(price);
         carMapper.addBrowsTimes(carId);
-        return car;
+
+        return carPDO;
     }
 
     @Override

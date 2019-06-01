@@ -8,5 +8,7 @@ import java.util.List;
 @Mapper
 public interface BuyMapper {
     int addBuy(Buy buy);
-    List<Buy> getList(Integer userId);
+    List<Buy> getList(int userId);
+
+    Buy selectBuy(Buy buy);
 }

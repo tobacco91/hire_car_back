@@ -9,5 +9,5 @@ import java.util.List;
 @Mapper
 public interface ReleaseMapper {
     int addRelease(Release release);
-    List<Release> getList(Integer userId);
+    List<Release> getList(int userId);
 }

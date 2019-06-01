@@ -8,5 +8,6 @@ import java.util.List;
 @Mapper
 public interface CollectMapper {
     int addCollect(Collect collect);
-    List<Collect> getList(Integer userId);
+    List<Collect> getList(int userId);
+    Collect selectCollect(Collect collect);
 }

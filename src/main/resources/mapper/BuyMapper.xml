@@ -18,4 +18,14 @@
         AND
         buy.user_id = #{userId}
     </select>
+    <select id="selectBuy" resultType="com.example.hirecar.bean.Buy">
+		SELECT
+		*
+		FROM
+		buy
+		WHERE
+		car_id = #{carId}
+        AND
+        user_id = #{userId}
+	</select>
 </mapper>

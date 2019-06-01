@@ -34,13 +34,13 @@ public class CarController {
     }
     @PostMapping("/hireCar")
     public Response hireCar(@RequestBody Buy buy) {
-        carService.hireCar(buy);
-        return new Response(200,"购买成功");
+        boolean res = carService.hireCar(buy);
+        return res ? new Response(200,"租赁成功"): new Response(200,"请勿重复租赁");
     }
     @PostMapping("/collectCar")
     public Response collectCar(@RequestBody Collect collect) {
-        carService.collectCar(collect);
-        return new Response(200,"收藏成功");
+        boolean res = carService.collectCar(collect);
+        return res ? new Response(200,"收藏成功"): new Response(200,"请勿重复收藏");
     }
     @GetMapping("/getCar")
     public Response<Car> getCar(int carId) {
