@@ -43,7 +43,9 @@ public class UserServiceImpl implements UserService {
         } else {
             UserCachePDO userCachePDO = new UserCachePDO();
             userCachePDO.setUserId(user.getUserId());
-            userCachePDO.setToken(UUID.randomUUID().toString().replace("-", ""));
+            userCachePDO.setToken(
+                    UUID.randomUUID().toString().replace("-", "")
+            );
             this.addCatche(userCachePDO);
             return user;
         }
@@ -76,7 +78,9 @@ public class UserServiceImpl implements UserService {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            User param = new User(registerParam.getAccount(),path,registerParam.getPassword(),registerParam.getName());
+            User param = new User(registerParam.getAccount()
+                    ,path,registerParam.getPassword(),
+                    registerParam.getName());
             int row = userMapper.addUser(param);
             return row;
         }

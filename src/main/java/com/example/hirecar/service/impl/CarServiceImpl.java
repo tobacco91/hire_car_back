@@ -32,6 +32,7 @@ public class CarServiceImpl implements CarService {
     private CollectMapper collectMapper;
     @Autowired
     private ReleaseMapper releaseMapper;
+
     @Override
     public List<Car> hotList() {
         List<Car> list =  carMapper.getListLimit(10);
